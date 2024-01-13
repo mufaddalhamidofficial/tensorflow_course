@@ -1,7 +1,9 @@
 pizza_meat/
 pizza_meat.zip
 model.keras
-!.conda
+.conda
 10_food_classes_all_data/
 __MACOSX/
 10_food_classes_10_percent/
+10_food_classes_1_percent/
+101_food_classes_10_percent/
