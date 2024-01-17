@@ -299,7 +299,7 @@ def compare_historys(
 import zipfile
 
 
-def unzip_data(filename: str):
+def unzip_data(filename: str, path_name: str = None):
     """
     Unzips filename into the current working directory.
 
@@ -307,7 +307,7 @@ def unzip_data(filename: str):
       filename (str): a filepath to a target zip folder to be unzipped.
     """
     zip_ref = zipfile.ZipFile(filename, "r")
-    zip_ref.extractall()
+    zip_ref.extractall(path_name)
     zip_ref.close()
 
 
