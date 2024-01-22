@@ -226,8 +226,10 @@ def plot_loss_curves(history: tf.keras.callbacks.History):
     val_accuracy = history.history["val_accuracy"]
 
     epochs = range(len(history.history["loss"]))
+    plt.figure(figsize=(5 * 2.5, 5))
 
     # Plot loss
+    plt.subplot(1, 2, 1)
     plt.plot(epochs, loss, label="training_loss")
     plt.plot(epochs, val_loss, label="val_loss")
     plt.title("Loss")
@@ -235,7 +237,7 @@ def plot_loss_curves(history: tf.keras.callbacks.History):
     plt.legend()
 
     # Plot accuracy
-    plt.figure()
+    plt.subplot(1, 2, 2)
     plt.plot(epochs, accuracy, label="training_accuracy")
     plt.plot(epochs, val_accuracy, label="val_accuracy")
     plt.title("Accuracy")
@@ -362,3 +364,27 @@ def calculate_results(y_true: np.array, y_pred: np.array):
         "f1": model_f1,
     }
     return model_results
+
+
+import time
+
+
+def pred_timer(model, samples):
+    """
+    Times how long a model takes to make predictions on samples.
+
+    Args:
+      model: a trained TensorFlow model for making predictions on samples
+      samples: a NumPy array of samples (e.g. test dataset)
+
+    Returns:
+        total_time (float): the total time taken for predictions in milliseconds
+        time_per_pred (float): the time taken for each individual sample in milliseconds
+    """
+    start_time = time.perf_counter()  # get start time
+    model.predict(samples)
+    end_time = time.perf_counter()  # get finish time
+    total_time = end_time - start_time  # calculate how long predictions took to make
+    time_per_pred = total_time / len(samples)  # find prediction time per sample
+    time_per_pred = time_per_pred * 1000  # convert to ms
+    return total_time, time_per_pred
