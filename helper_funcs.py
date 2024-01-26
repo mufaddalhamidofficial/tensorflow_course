@@ -185,7 +185,9 @@ def create_tensorboard_callback(dir_name: str, experiment_name: str):
     return tensorboard_callback
 
 
-def create_checkpoint_callback(dir_name: str, experiment_name: str):
+def create_checkpoint_callback(
+    dir_name: str, experiment_name: str, monitor="val_accuracy"
+):
     """
     Creates a ModelCheckpoint callback to save models during training.
 
@@ -199,7 +201,7 @@ def create_checkpoint_callback(dir_name: str, experiment_name: str):
     checkpoint_dir = dir_name + "/" + experiment_name + "/checkpoint.ckpt"
     checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
         checkpoint_dir,
-        monitor="val_accuracy",
+        monitor=monitor,
         save_best_only=True,
         save_weights_only=True,
         verbose=0,
