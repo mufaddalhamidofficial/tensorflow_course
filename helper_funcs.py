@@ -198,7 +198,7 @@ def create_checkpoint_callback(
       dir_name: target directory to store model checkpoints
       experiment_name: name of experiment directory (e.g. efficientnet_model_1)
     """
-    checkpoint_dir = dir_name + "/" + experiment_name + "/checkpoint.ckpt"
+    checkpoint_dir = dir_name + "/" + experiment_name + "/checkpoint.weights.h5"
     checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
         checkpoint_dir,
         monitor=monitor,
